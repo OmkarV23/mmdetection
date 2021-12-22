@@ -520,6 +520,10 @@ class SwinTransformer(BaseModule):
             Defaults to None.
     """
 
+    #################################
+    #convert_weights = True for mmdet to convert swin original weights
+    #################################
+    
     def __init__(self,
                  pretrain_img_size=224,
                  in_channels=3,
@@ -542,7 +546,7 @@ class SwinTransformer(BaseModule):
                  norm_cfg=dict(type='LN'),
                  with_cp=False,
                  pretrained=None,
-                 convert_weights=False,
+                 convert_weights=True,
                  frozen_stages=-1,
                  init_cfg=None):
         self.convert_weights = convert_weights

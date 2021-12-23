@@ -1,5 +1,6 @@
 # dataset settings
 dataset_type = 'CocoDataset'
+classes = ('cots',)
 data_root = 'data/coco/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -30,20 +31,23 @@ test_pipeline = [
 ]
 data = dict(
     samples_per_gpu=2,
-    workers_per_gpu=2,
+    workers_per_gpu=0,
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/instances_train2017.json',
-        img_prefix=data_root + 'train2017/',
+        classes=classes,
+        ann_file=data_root + 'new_annotations_train.json',
+        img_prefix='/mmdetection/data/splitted_data/train2017',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/instances_val2017.json',
-        img_prefix=data_root + 'val2017/',
+        classes=classes,
+        ann_file=data_root + 'new_annotations_valid.json',
+        img_prefix='/mmdetection/data/splitted_data/val2017/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/instances_val2017.json',
-        img_prefix=data_root + 'val2017/',
+        classes=classes,
+        ann_file=data_root + 'new_annotations_valid.json',
+        img_prefix='/mmdetection/data/splitted_data/val2017/',
         pipeline=test_pipeline))
 evaluation = dict(interval=1, metric='bbox')
